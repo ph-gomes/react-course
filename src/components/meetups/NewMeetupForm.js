@@ -2,13 +2,15 @@ import { useRef } from 'react';
 import Card from '../ui/Card';
 import classes from './NewMeetupForm.module.css';
 
-const NewMeetupForm = () => {
+const NewMeetupForm = (props) => {
+  const { onAddMeetup } = props;
+
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const addressInputRef = useRef();
   const descriptionInputRef = useRef();
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     const title = titleInputRef.current.value;
@@ -23,7 +25,7 @@ const NewMeetupForm = () => {
       description,
     };
 
-    console.log(meetupData);
+    await onAddMeetup(meetupData);
   };
 
   return (
